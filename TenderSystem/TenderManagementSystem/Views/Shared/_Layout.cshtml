@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Tender Management System</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+
+                    @if ((ViewContext.RouteData.Values["action"].ToString() != "ViewCustomers") &&
+                    (ViewContext.RouteData.Values["action"].ToString() != "ViewTenders") &&
+                    (ViewContext.RouteData.Values["action"].ToString() != "AddTender") &&
+                    (ViewContext.RouteData.Values["action"].ToString() != "ViewBids") &&
+                    (ViewContext.RouteData.Values["action"].ToString() != "ViewDetails") &&
+                    (ViewContext.RouteData.Values["action"].ToString() != "ViewTenderDetails") &&
+                    (ViewContext.RouteData.Values["action"].ToString() != "EditCustomer"))
+                    {
+
+                        <li>@Html.ActionLink("Tenders", "Tenders", "Tender")</li>
+                        if (ViewContext.HttpContext.Session.Count == 1)
+                        {
+                            <li>@Html.ActionLink("View My Bids", "ViewMyBids", "Bid")</li>
+                        }
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact Us", "ContactUs", "Home")</li>
+                    } else if ((ViewContext.RouteData.Values["action"].ToString() == "ViewCustomers") ||
+                       (ViewContext.RouteData.Values["action"].ToString() == "ViewTenders") ||
+                       (ViewContext.RouteData.Values["action"].ToString() == "AddTender") ||
+                       (ViewContext.RouteData.Values["action"].ToString() == "ViewBids") ||
+                       (ViewContext.RouteData.Values["action"].ToString() != "ViewMyBids") ||
+                       (ViewContext.RouteData.Values["action"].ToString() == "EditTender") ||
+                       (ViewContext.RouteData.Values["action"].ToString() != "ViewDetails") ||
+                       (ViewContext.RouteData.Values["action"].ToString() != "AddBidDetails") ||
+                       (ViewContext.RouteData.Values["action"].ToString() == "EditCustomer") ||
+                            (ViewContext.RouteData.Values["action"].ToString() != "ViewTenderDetails"))
+                    {
+                            <li>@Html.ActionLink("View Customers", "ViewCustomers", "Home")</li>
+                            <li>@Html.ActionLink("View Tenders", "ViewTenders", "Tender")</li>
+                            <li>@Html.ActionLink("Add Tenders", "AddTender", "Tender")</li>
+                            <li>@Html.ActionLink("View Bids", "ViewBids", "Bid")</li>
+                    }
+
+                    </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (ViewContext.HttpContext.Session.Count == 1)
+                    {
+                        <li>@Html.ActionLink("Edit Profile", "EditProfile", "Home")</li>
+                        <li>@Html.ActionLink("Logout", "Login", "Home")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "Home")</li>
+                        <li>@Html.ActionLink("Sign Up", "Register", "Home")</li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

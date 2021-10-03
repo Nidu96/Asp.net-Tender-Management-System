@@ -1,0 +1,51 @@
+﻿@model IEnumerable<TenderManagementSystem.Models.Bid>
+@{
+    ViewBag.Title = "ViewMyBids";
+}
+<div class="row">
+    <div class="container">
+        <h3>My Bids</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    Bid Id
+                </th>
+                <th>
+                    Date Submitted
+                </th>
+                <th>
+                    Tender Code
+                </th>
+                <th>
+                    Bidder Code
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.BidID
+                    </td>
+                    <td>
+                        @item.DateSubmitted
+                    </td>
+                    <td>
+                        @item.TenderID
+                    </td>
+                    <td>
+                        @item.UserID
+                    </td>
+                    <td>
+                        @Html.ActionLink("View", "ViewBidDetails", new { id = item.Id }) |
+                        @Html.ActionLink("Edit", "EditBid", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "ViewBidDetails", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+

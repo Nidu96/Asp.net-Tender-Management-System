@@ -1,0 +1,27 @@
+﻿@model IEnumerable<TenderManagementSystem.Models.Tender>
+@{
+    ViewBag.Title = "Tenders";
+}
+<h3>Tenders</h3>
+<hr />
+@foreach (var item in Model)
+{
+    <div class="col-md-4">
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h4>@item.TenderName</h4>
+                    <br />
+                    <h5 style="text-align: left; padding: 5px; padding-left: 20px; padding-right: 20px">Tender Code: @item.TenderID</h5>
+                    <h5 style="text-align: left; padding: 5px; padding-left: 20px; padding-right: 20px ">Tender Date: @item.TenderDate</h5>
+                    <h5 style="text-align: left; padding: 5px; padding-left: 20px; padding-right: 20px ">Description: @item.Description</h5>
+                    <br /><br />
+                    <a href="@Url.Content(@item.ImageURL)" target="_blank">View PDF</a> |
+                    @Html.ActionLink("Bid for Tender", "AddBidDetails", "Bid", new { id = item.Id }, null)
+                </div>
+            </div>
+        </div>
+        <br />
+    </div>
+}
+

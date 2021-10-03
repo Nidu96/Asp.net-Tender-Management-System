@@ -1,0 +1,36 @@
+CREATE TABLE [dbo].[Bid] (
+    [Id]            INT        NOT NULL,
+    [BidID]         NCHAR (50) NULL,
+    [DateSubmitted] DATETIME   NULL,
+    [TenderID]      NCHAR (50) NULL,
+    [UserID]        NCHAR (50) NULL,
+    [Price]         NCHAR (50) NULL,
+    [Status]        NCHAR (50) NULL,
+    [Description]   TEXT       NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+CREATE TABLE [dbo].[SystemUser] (
+    [Id]            INT        NOT NULL,
+    [UserID]        NCHAR (50) NULL,
+    [FullName]      NCHAR (30) NULL,
+    [Phone]         NCHAR (30) NULL,
+    [Email]         NCHAR (30) NULL,
+    [Password]      NCHAR (20) NULL,
+    [AddressLine_1] NCHAR (40) NULL,
+    [AddressLine_2] NCHAR (40) NULL,
+    [AddressLine_3] NCHAR (40) NULL,
+    [UserRole]      NCHAR (10) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[Tender] (
+    [Id]          INT         NOT NULL,
+    [TenderID]    NCHAR (50)  NULL,
+    [TenderName]  NCHAR (100) NULL,
+    [TenderDate]  NCHAR (100) NULL,
+    [Image]       NCHAR (100) NULL,
+    [Description] TEXT        NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);

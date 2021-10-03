@@ -1,0 +1,68 @@
+﻿@model IEnumerable<TenderManagementSystem.Models.SystemUser>
+@{
+    ViewBag.Title = "ViewCustomers";
+}
+<div class="row">
+    <div class="container">
+        <h3>Cutsomer Details</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    Customer Id
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Phone
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Address Line 1
+                </th>
+                <th>
+                    Address Line 2
+                </th>
+                <th>
+                    Address Line 3
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @item.UserID
+                </td>
+                <td>
+                    @item.FullName
+                </td>
+                <td>
+                    @item.Phone
+                </td>
+                <td>
+                    @item.Email
+                </td>
+                <td>
+                    @item.AddressLine_1
+                </td>
+                <td>
+                    @item.AddressLine_2
+                </td>
+                <td>
+                    @item.AddressLine_3
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditCustomer", new { id = item.Id }, null) |
+                    @Html.ActionLink("View", "ViewDetails", new { id = item.Id }, null) |
+                    @Html.ActionLink("Delete", "ViewDetails", new { id = item.Id }, null)
+                </td>
+            </tr>
+            }
+
+        </table>
+    </div>
+</div>

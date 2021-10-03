@@ -1,0 +1,195 @@
+﻿@model TenderManagementSystem.Models.Tender
+
+@{
+    ViewBag.Title = "ViewTenderDetails";
+}
+
+<script>
+    function AcceptBid(id) {
+        location.href = "/Tender/AcceptBid/" + id;
+    }
+    function RejectBid(id) {
+        location.href = "/Tender/RejectBid/" + id;
+    }
+    function EvaluateBid(id) {
+        location.href = "/Tender/EvaluateBid/" + id;
+    }
+</script>
+
+<h3>View Tender Details</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Id, "ID", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TenderID, "Tender ID", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TenderID, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenderID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.TenderName, "Tender Name", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TenderName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenderName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TenderDate, "TenderDate", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TenderDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenderDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ImageURL, "Image", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <a href="@Url.Content(Model.ImageURL)" target="_blank">File</a>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Delete Tender" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div class="row">
+    <div class="container">
+        <h3>Bids</h3>
+        <h5>*Note that the first bid is the highest bid submitted for this tender</h5>
+        <table class="table">
+            <tr>
+                <th>
+                    Bid Id
+                </th>
+                <th>
+                    Date Submitted
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Current Status
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.BidsList)
+            {
+                <tr>
+                    <td>
+                        @item.BidID
+                    </td>
+                    <td>
+                        @item.DateSubmitted
+                    </td>
+                    <td>
+                        @item.Price
+                    </td>
+                    @if (Model.UserRole.Contains("Director"))
+                    {
+                        if (item.Status.Contains("Pending"))
+                        {
+                            <td style="color:darkorange">
+                                @item.Status
+                            </td>
+                            <td></td>
+                        }
+                        if (item.Status.Contains("Evaluated"))
+                        {
+                            <td style="color: dodgerblue">
+                                @item.Status
+                            </td>
+                            <td>
+                                <input type="button" class="btn btn-default" value="Accept"
+                                       onclick="AcceptBid(@item.Id)" style="color:white; background-color:forestgreen" />
+                            </td>
+                        }
+                        if (item.Status.Contains("Accepted"))
+                        {
+                            <td style="color:forestgreen">
+                                @item.Status
+                            </td>
+                            <td>
+                                <input type="button" class="btn btn-default" value="Reject"
+                                       onclick="RejectBid(@item.Id)" style="color:white; background-color:red" />
+                            </td>
+                        }
+                        if (item.Status.Contains("Rejected"))
+                        {
+                            <td style="color:red">
+                                @item.Status
+                            </td>
+                            <td></td>
+                        }
+                    }
+                    else
+                    {
+                        if (item.Status.Contains("Pending"))
+                        {
+                            <td style="color:darkorange">
+                                @item.Status
+                            </td>
+                            <td>
+                                <input type="button" class="btn btn-default" value="Evaluate"
+                                       onclick="EvaluateBid(@item.Id)" style="color:white; background-color:dodgerblue" />
+                            </td>
+                        }
+                        if (item.Status.Contains("Evaluated"))
+                        {
+                            <td style="color:darkorange">
+                                @item.Status
+                            </td>
+                            <td></td>
+                        }
+                        if (item.Status.Contains("Accepted"))
+                        {
+                            <td style="color:forestgreen">
+                                @item.Status
+                            </td>
+                            <td></td>
+                        }
+                        if (item.Status.Contains("Rejected"))
+                        {
+                            <td style="color:red">
+                                @item.Status
+                            </td>
+                            <td></td>
+                        }
+                    }
+
+                    <td>
+                        <a href="@Url.Action("ViewBidDetails", "Bid",new { id=item.Id } )">View</a> |
+                        <a href="@Url.Action("ViewBidDetails", "Bid",new { id=item.Id } )">Delete</a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Back to List", "ViewTenders")
+</div>
+

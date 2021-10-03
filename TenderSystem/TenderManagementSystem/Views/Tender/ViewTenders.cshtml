@@ -1,0 +1,55 @@
+﻿@model IEnumerable<TenderManagementSystem.Models.Tender>
+@{
+    ViewBag.Title = "ViewTenders";
+}
+<script>
+    function SendEmails(tenderid) {
+        location.href = "/Tender/EmailBidders/" + tenderid;
+    }
+</script>
+<div class="row">
+    <div class="container">
+        <h3>Tender Details</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    Tender Id
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    TenderDate
+                </th>
+                <th>Email Bidders</th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @item.TenderID
+                </td>
+                <td>
+                    @item.TenderName
+                </td>
+                <td>
+                    @item.TenderDate
+                </td>
+                <td>
+                    <input type="button" class="btn btn-default" value="Email Bidders"
+                           onclick="SendEmails(@item.Id)" style="color:white; background-color:dodgerblue" />
+                </td>
+                <td>
+                    @Html.ActionLink("View", "ViewTenderDetails", new { id = item.Id }) |
+                    @Html.ActionLink("Edit", "EditTender", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "ViewTenderDetails", new { id = item.Id })
+                </td>
+            </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
