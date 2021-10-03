@@ -349,7 +349,7 @@ namespace TenderManagementSystem.Controllers
                 //sending email
                 System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage();
                 mail.To.Add(Session["Email"].ToString());
-                mail.From = new MailAddress("sihaninidu3@gmail.com", "Tender Management System", System.Text.Encoding.UTF8);
+                mail.From = new MailAddress("YOUR EMAIL", "Tender Management System", System.Text.Encoding.UTF8);
                 mail.Subject = "Submitted Bid";
                 mail.SubjectEncoding = System.Text.Encoding.UTF8;
                 mail.Body = "Bid Id: " + bid.BidID + "<br>" +
@@ -362,7 +362,7 @@ namespace TenderManagementSystem.Controllers
                 mail.IsBodyHtml = true;
                 mail.Priority = MailPriority.High;
                 SmtpClient client = new SmtpClient();
-                client.Credentials = new System.Net.NetworkCredential("sihaninidu3@gmail.com", "itsMINE-1023##");
+                client.Credentials = new System.Net.NetworkCredential("YOUR EMAIL", "YOUR PASSWORD");
                 client.Port = 587;
                 client.Host = "smtp.gmail.com";
                 client.EnableSsl = true;
@@ -537,7 +537,7 @@ namespace TenderManagementSystem.Controllers
             //sending email
             System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage();
             mail.To.Add(Session["Email"].ToString());
-            mail.From = new MailAddress("sihaninidu3@gmail.com", "Tender Management System", System.Text.Encoding.UTF8);
+            mail.From = new MailAddress("YOUR EMAIL", "Tender Management System", System.Text.Encoding.UTF8);
             mail.Subject = "Submitted Bid";
             mail.SubjectEncoding = System.Text.Encoding.UTF8;
             mail.Body = "Bid Id: " + bid.BidID + "<br>" +
@@ -550,7 +550,7 @@ namespace TenderManagementSystem.Controllers
             mail.IsBodyHtml = true;
             mail.Priority = MailPriority.High;
             SmtpClient client = new SmtpClient();
-            client.Credentials = new System.Net.NetworkCredential("sihaninidu3@gmail.com", "itsMINE-1023##");
+            client.Credentials = new System.Net.NetworkCredential("YOUR EMAIL", "YOUR PASSWORD");
             client.Port = 587;
             client.Host = "smtp.gmail.com";
             client.EnableSsl = true;
